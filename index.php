@@ -6,5 +6,12 @@ $token_access 	= 'slhaMqaHkp1bscJ8uOp059U33TW/1Oh09GOG8M3QJdL9pGu29+ibRJYHW5fsi+
 $httpClient 	= new \LINE\LINEBot\HTTPClient\CurlHTTPClient($token_access);
 $bot 			= new \LINE\LINEBot($httpClient, ['channelSecret' => '798a6fe2afc3c6a5a763f8cd5f3d368a']);
 
+$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
+$response = $bot->replyMessage('nHuyWiB7yP5Zw52FIkcQobQuGDXCTA', $textMessageBuilder);
+if ($response->isSucceeded()) {
+    echo 'Succeeded!';
+    return;
+}
 
-$response = $bot->replyText('nHuyWiB7yP5Zw52FIkcQobQuGDXCTA', 'hello!');
+// Failed
+echo $response->getHTTPStatus() . ' ' . $response->getRawBod
