@@ -26,5 +26,6 @@ if (!is_null($events['events'])) {
 	}
 }
 
+if(isset($_SESSION['users_id']))
 print_r($_SESSION['users_id']);
 
