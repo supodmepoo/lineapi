@@ -26,5 +26,5 @@ if (!is_null($events['events'])) {
 	}
 }
 
-print_pre($_SESSION['users_id']);
+print_r($_SESSION['users_id']);
 
