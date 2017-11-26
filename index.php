@@ -1,6 +1,6 @@
 <?php
-session_start();
 require_once __DIR__.'/vendor/autoload.php';
+
 // Get POST body content
 $content 		= file_get_contents('php://input');
 
@@ -19,13 +19,10 @@ if (!is_null($events['events'])) {
 	foreach ($events['events'] as $event) {
 		// Reply only when message sent is in 'text' format
 		if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
-			$_SESSION['users_id'] = $event['message']['type'];
 			$response = $bot->replyMessage($replyToken, $textMessageBuilder);
 			echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
 		}
 	}
 }
 
-if(isset($_SESSION['users_id']))
-print_r($_SESSION['users_id']);
 
