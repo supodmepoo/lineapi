@@ -1,12 +1,12 @@
 <?php
+session_start();
 require_once __DIR__.'/vendor/autoload.php';
-
 // Get POST body content
 $content 		= file_get_contents('php://input');
 
 // Parse JSON
 $events 		= json_decode($content, true);
-
+$_SESSION['token'] = 55;
 $token_access 	= 'slhaMqaHkp1bscJ8uOp059U33TW/1Oh09GOG8M3QJdL9pGu29+ibRJYHW5fsi+l8zft0WjPmVRrZa/lnZyR/k3iU+mOqOvwNirBFEptNQHaf4br0APfSxbqEknnZ34pVe4PGE4S9Qwuid1ImsPJ/1wdB04t89/1O/w1cDnyilFU=';
 
 $httpClient 		= new \LINE\LINEBot\HTTPClient\CurlHTTPClient($token_access);
@@ -19,10 +19,12 @@ if (!is_null($events['events'])) {
 	foreach ($events['events'] as $event) {
 		// Reply only when message sent is in 'text' format
 		if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
+			$replyToken = $event['replyToken'];	
+			$_SESSION['token'] = $replyToken;
 			$response = $bot->replyMessage($replyToken, $textMessageBuilder);
 			echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
 		}
 	}
 }
-
+print_r($_SESSION['token']);
 
