@@ -20,6 +20,13 @@ if (!is_null($events['events'])) {
 		if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
 			$replyToken = $event['replyToken'];
 			$response = $bot->replyMessage($replyToken, $textMessageBuilder);
+			
+			$myfile = fopen("newfile.txt", "w") or die("Unable to open file!");
+			$txt = "John Doe\n";
+			fwrite($myfile, $txt);
+			$txt = "Jane Doe\n";
+			fwrite($myfile, $txt);
+			fclose($myfile);
 			echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
 		}
 	}
